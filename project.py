@@ -1,105 +1,86 @@
 import random
 
-print(
-  "*~*~*~*~*~**~*~*WELCOME TO THE GAME ROCK PAPER SCISSOR*~*~*~*~*~*~*~*~*")
-print()
-USER_SCORE = 0
-COMPUTER_SCORE = 0
-TIE = 0
-
-NAME = input("please enter your name buddy! 🥷🙋‍♂️")
-
+dic = {
+  "rock": "🪨",
+  "paper": "🧻",
+  "scissor": "✂️",
+}
+player_score = 0
+computer_score = 0
+tie = 0
+print("welcome to the game🤝 - rock🪨,paper🧻,scissor✂️")
 print('''
 🏹GAME RULES ARE!🏹:
 1. paper🧻  Vs rock🪨   -*-*-*-*-*->paper Win's!🧻
 2. rock🪨   Vs scissor✂️-*-*-*-*-*->rock Win's! 🪨
 3. scissor✂️Vs paper🧻  -*-*-*-*-*->scissor Win's!✂️
 ''')
-print()
+NAME = input("\nPLEASE ENTER YOUR NAME BUDDY\n:-")
+
 while True:
-  CHOICE = int(input("please enter your choice from 1-3:"))
-  print()
-  while CHOICE > 3 or CHOICE < 1:
-    CHOICE = int(input("please enter valid input from 1-3"))
+  player_turn = input("\n enter your choice(rock🪨,paper🧻,scissor✂️?) :- ")
+  while player_turn != "rock" and player_turn != "paper" and player_turn != "scissor":
+    print("\nplease enter correct choice!")
+    player_turn = input("\nenter your choice rock ,paper,scissor:-")
 
-  if CHOICE == 1:
-    user_choice = "rock🪨"
-  elif CHOICE == 2:
-    user_choice = "paper🧻"
-  else:
-    user_choice = "scissor✂️"
-  print()
-  print(NAME, "choice is 🙋‍♀️", user_choice)
-  print("Now it's computer turn💻")
-  print()
-  computer = random.randint(1, 3)
+  possible_way = ["rock", "paper", "scissor"]
+  computer_move = random.choice(possible_way)
+  print("\n you choose:-", dic[player_turn], "\ncomputer choose:-",
+        dic[computer_move], "\n")
 
-  if computer == 1:
-    computer_choice = "rock🪨"
-  elif computer == 2:
-    computer_choice = "paper🧻"
-  else:
-    computer_choice = "scissor✂️"
-  print()
-  print("💻computer choice is", computer_choice)
-
-  if (user_choice == "paper🧻"
-      and computer_choice == "rock🪨") or (user_choice == "rock🪨"
-                                          and computer_choice == "paper🧻"):
-    print("paper🧻 Win's")
-    Result = "paper🧻"
-  elif (user_choice == "rock🪨" and computer_choice == "scissor✂️") or (
-      user_choice == "scissor✂️" and computer_choice == "rock🪨"):
-    print("rock🪨 Win's")
-    Result = "rock🪨"
-  elif (user_choice == computer_choice):
-    print("its a Tie😒")
-    Result = "Tie😒"
-  else:
-    print("scissor✂️ Win's")
-    Result = "scissor✂️"
-
-  if Result == "Tie😒":
-    print("GAME Tie😒")
-    TIE += 1
-  elif Result == user_choice:
-    print(NAME, "WIN'S🤩")
-    USER_SCORE += 1
-  else:
-    print("COMPUTER Win's🤪")
-    COMPUTER_SCORE += 1
-  print()
-  print("Scores are:")
-  print(NAME, "🥷Score is:", USER_SCORE)
-  print("💻computer Score is:", COMPUTER_SCORE)
-  print("😒tie's are:", TIE)
-  print()
-  repeat = input("🥷 🦹Do you challenge me again🥷")
-  if repeat == "yes" and repeat == "YES":
-    CHOICE = int(input("let's play"))
-  elif repeat != "YES" and repeat != "yes" and repeat != "no" and repeat != "NO":
-    repeat = input("please enter valid command Yes or NO")
-
-  elif repeat != "yes" and repeat != "YES" and repeat != "no" and repeat != "NO":
-    print("Invalid command🫥")
-    repeat = input("😀 Please enter valid command yes or no 😀 ")
-    if repeat=="yes" or repeat=="YES":
-       CHOICE=int(input(" please enter your choice from 1-2"))
+  if player_turn == computer_move:
+    print("both players selected", dic[player_turn], "\nits a tie")
+    tie = tie + 1
+  elif player_turn == "rock":
+    if computer_move == "scissor":
+      print("\n rock smashes the scissor YOU win")
+      player_score = player_score + 1
     else:
-       repeat=input(str("Please enter valid command yes or no"))
+      print("💻computer win")
+  elif player_turn == "paper":
+    if computer_move == "rock":
+      print(" paper🧻 cover the rock🪨! player win")
+      player_score = player_score + 1
+    else:
+      print("💻computer win")
+      computer_score = computer_score + 1
 
-  elif repeat == "no" or repeat == "NO":
+  elif player_turn == "scissor":
+    if computer_score == "paper":
+      print("scissor✂️ cut the paper🧻", NAME, "win")
+      player_score = player_score + 1
+    else:
+      print("computer win")
+      computer_score = computer_score + 1
+
+  play_agin = input("do you want to play agin(yes to enter no to exit ):-")
+  if play_agin == "no":
     break
-  print()
-if COMPUTER_SCORE > USER_SCORE:
-  print("The winners is computer💻 ")
-elif USER_SCORE > COMPUTER_SCORE:
-  print("The winner is ", NAME)
-elif USER_SCORE == COMPUTER_SCORE == TIE:
-  print("Match are Tie😒")
-else:
-  print("Match are Tie😒")
 
-print("👋Game over👋")
-print("Well play 👏", NAME)
-print(" 💐 Thank u for playing 💐 ")
+  Flag = True
+  while play_agin != "yes":
+    Flag = True
+    print("\nselect correct option yes/no")
+    play_agin = input("do you want to play again(yes\no):-")
+    if play_agin == "no":
+      Flag = False
+      break
+
+  if Flag == False:
+    break
+
+print()
+print("\n🙏ngame end,thank u for playing🙏")
+print("\nscores of both player:-")
+print("\n💻computer_score", computer_score)
+print("\n", NAME, player_score)
+print("\ntotal tie in the game", tie)
+print()
+
+if player_score > computer_score:
+  print(NAME, "win")
+elif player_score == computer_score:
+  print("\ngame Tie😒")
+else:
+  print("\ncomputer win")
+
